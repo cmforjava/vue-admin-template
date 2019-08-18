@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { getOne } from '@/api/express'
 export default {
   data() {
     return {
@@ -60,7 +61,8 @@ export default {
         type: [],
         resource: '',
         desc: ''
-      }
+      },
+      formdata: {}
     }
   },
   methods: {
@@ -73,6 +75,14 @@ export default {
         type: 'warning'
       })
     }
+  },
+  mounted() {
+    let route = this.$route
+    let id = route.params.pathMatch
+    getOne(id).then(res => {
+      this.formdata = res.data
+      debugger
+    })
   }
 }
 </script>
